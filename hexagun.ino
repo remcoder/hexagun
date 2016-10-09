@@ -69,16 +69,25 @@ void selectWeapon() {
     oldWeaponIndex = weaponIndex;
     Serial.print("weapon: ");
     Serial.println(weaponIndex);
-    Serial.println(weapons[weaponIndex]);
+    String curWeapon = String("[") + String(weapons[weaponIndex]);
+
+    // pad with spaces
+    while(curWeapon.length() < 15) {
+      curWeapon += " ";
+    }
+
+    curWeapon += "]";
+    
+    Serial.println(curWeapon);
 
     lcd.clear();
-    lcd.home();                   // go home
-    lcd.print(weapons[weaponIndex]);
-
-//    colorWipe(strip.Color(255, 0, 0), 50); // Red`
+    lcd.home();
+    
+    lcd.print(curWeapon.c_str());
   }
-
 }
+
+
 
 void fire() {
   Serial.println("fire!");
