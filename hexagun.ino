@@ -28,6 +28,15 @@ const char* weapons[]={
 void setup() {
   Serial.begin(9600);
   Serial.println("Hexagun starting...");
+
+  lcd.begin(16,2);               // initialize the lcd 
+  lcd.clear();
+  lcd.home();                    // go home
+  lcd.print("Hexagun");
+  lcd.setCursor(0,1);
+  lcd.print("charging...");
+  delay(2000);
+  lcd.clear();
   
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
@@ -36,7 +45,7 @@ void setup() {
   pinMode(firePin, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(firePin), fire, FALLING);
   
-  lcd.begin(16,2);               // initialize the lcd 
+  
 }
 
 long oldPosition  = -999;
