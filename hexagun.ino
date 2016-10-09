@@ -53,13 +53,13 @@ long oldWeaponIndex = -1;
 int weaponIndex = 0;
 
 void loop() {
-  long newPosition = myEnc.read();
-  if (newPosition != oldPosition && newPosition >= 0) {
+  long newPosition = mod(myEnc.read(), 24);
+  if (newPosition != oldPosition) {
     oldPosition = newPosition;
     Serial.print("pos: ");
     Serial.println(newPosition);
 
-    weaponIndex = (newPosition >> 2) % 6;
+    weaponIndex = (newPosition >> 2);
     selectWeapon();
   }
 }
@@ -137,4 +137,14 @@ void colorWipe(uint32_t c, uint8_t wait) {
       strip.show();
 //      delay(wait);
   }
+}
+
+int mod (int a, int b)
+{
+   if(b < 0) //you can check for b == 0 separately and do what you want
+     return mod(a, -b);   
+   int ret = a % b;
+   if(ret < 0)
+     ret+=b;
+   return ret;
 }
