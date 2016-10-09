@@ -26,10 +26,11 @@ char* weapons[]={
 
 
 void setup() {
+  Serial.begin(9600);
+  Serial.println("Hexagun starting...");
+  
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
-  
-  Serial.begin(9600);
   
   
   pinMode(firePin, INPUT_PULLUP);
